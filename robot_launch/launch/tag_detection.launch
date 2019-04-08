@@ -1,0 +1,34 @@
+<launch>
+  <node pkg="apriltags_ros" type="apriltag_detector_node" name="apriltag_detector" output="screen" ns="camera">
+    <!-- Enter your AprilTag information below. Add all tag IDs that will be used, with their sizes -->
+    <rosparam param="tag_descriptions">[
+      {id: 0, size: 0.076},
+      {id: 1, size: 0.076},
+      {id: 2, size: 0.081},
+      {id: 3, size: 0.081},
+      {id: 4, size: 0.081},
+      {id: 5, size: 0.081},
+      {id: 6, size: 0.054},
+      {id: 7, size: 0.054},
+      {id: 8, size: 0.054},
+      {id: 9, size: 0.054},
+      {id: 10, size: 0.054},
+      {id: 11, size: 0.054},
+      {id: 12, size: 0.054},
+      {id: 13, size: 0.054},
+      {id: 14, size: 0.054},
+      {id: 15, size: 0.054},
+      ]
+    </rosparam>
+    <!-- <remap from="image_rect" to="image_raw"/> -->
+
+    <!-- Image_raw is in color -->
+    <!-- <remap from="image_rect" to="/usb_cam/image_raw"/> -->
+
+    <!-- image_rect is in black and white; not sure which one is better to send to april tag detector> -->
+    <remap from="image_rect" to="/usb_cam/image_rect"/>
+  </node>
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.1 0 0.455 0 0 0 base_link camera_link 100"/> -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="tag1_broadcaster" args="1 0 0 0 0 0 1 world tag1 100" /> -->
+</launch>
