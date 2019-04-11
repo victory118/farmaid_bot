@@ -1,3 +1,8 @@
 <launch>
-        <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.1 0 0.455 0 0 0 base_link camera_link 100"/>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.1 0 0.455 0 0 0 base_link camera_link 100"/> -->
+  <node pkg="robot_launch" type="tf_broadcaster.py" name="tf_broadcaster" output="screen">
+    <param name="param_path" value="$(find robot_launch)/tag_info/tag_info.yaml"/>
+  </node>
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.1 0 0.455 0 0 0 world tag1 50"/> -->
 </launch>
