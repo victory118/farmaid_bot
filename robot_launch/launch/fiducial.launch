@@ -1,0 +1,22 @@
+<launch>
+  <arg name="camera" default="usb_cam"/>
+  <arg name="image" default="image_raw"/>
+
+  <!-- <include file="$(find robot_launch)/launch/camera_rect.launch"/> -->
+  <include file="$(find aruco_detect)/launch/aruco_detect.launch">
+    <arg name="camera" value="$(arg camera)" />
+    <arg name="image" value="$(arg image)"/>
+  </include>
+  <include file="$(find fiducial_slam)/launch/fiducial_slam.launch">
+    <arg name="camera" value="$(arg camera)" />
+    <arg name="publish_6dof_pose" value="true"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="camera_base"
+    args="0.105 0.0 0.155 0.0 0.0 0.7071068 0.7071068 base_link usb_cam 50"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_odom"
+    args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 odom base_link 50"/>
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="camera_base"
+    args="0.105 0.0 0.155 0.0 0.0 -1.5707963 base_link usb_cam"/> -->
+  <!-- <node pkg="tf" type="static_transform_publisher" name="tag1_broadcaster" args="1 0 0 0 0 0 1 world tag1 100" /> -->
+</launch>
